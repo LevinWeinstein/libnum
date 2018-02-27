@@ -26,18 +26,19 @@ all:
 	@if test ! -f $(LIBNAME); then \
 		make innerall; \
 	else \
-		echo "\t\x1b[33mlibnum.a Already Made!"; \
+		echo "\t\x1b[33mlibnum.a Already Made!\x1b[0m"; \
 	fi
 
 innerall: $(LIBNAME)
 	@echo "\x1b[96m\t[\x1b[33m\x1b[4mLibnum\x1b[24m\x1b[21m\x1b[96m]:\x1b[21m\x1b[32mlibnum: libnum.a Complete!"
+	@echo "\x1b[0m"
 
 $(LIBNAME): $(OBJECTS)
 	@echo "\x1b[96m\t[\x1b[33m\x1b[4mLibnum\x1b[24m\x1b[96m]:\x1b[32mLibnum: Turning Objects Into Library"
 	@ar rc $(LIBNAME) $(OBJECTS)
 	@echo "\x1b[96m\t[\x1b[33m\x1b[4mLibnum\x1b[24m\x1b[96m]:\x1b[21m\x1b[32mlibnum: Optimizing... (ranlib)"
 	@ranlib $(LIBNAME)
-	
+	@echo "\x1b[0m"
 
 
 $(OBJECTS): $(SRCFILES)
@@ -48,13 +49,16 @@ $(OBJECTS): $(SRCFILES)
 	else \
 		echo "\x1b[96m\t[\x1b[33m\x1b[4mlibnum\x1b[24m\x1b\x1b[96m]:\x1b[21m\x1b[32m Objects Compiled\x1b[21m"; \
 	fi
+	@echo "\x1b[0m"
 
 clean: 	
 	@/bin/rm -f $(OBJECTS)
 	@echo "\x1b[96m\t[\x1b[33m\x1b[4mlibnum\x1b[24m\x1b[21m\x1b[96m]:\x1b[21m\x1b[32mlibnum: clean Complete!"
+	@echo "\x1b[0m"
 fclean: clean
 	@/bin/rm -f $(LIBNAME)
 	@echo "\x1b[96m\t[\x1b[33m\x1b[4mlibnum\x1b[24m\x1b[21m\x1b[96m]:\x1b[21m\x1b[32mlibnum: fclean Complete!"
+	@echo "\x1b[0m"
 
 re:	fclean all	
 .PHONY: clean fclean re all
